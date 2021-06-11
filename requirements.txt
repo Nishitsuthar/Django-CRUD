@@ -1,6 +1,4 @@
-apparmor==3.0.1
 appdirs==1.4.4
-application-utility==1.3.2
 argon2-cffi==20.1.0
 asgiref==3.3.4
 astroid==2.5.6
