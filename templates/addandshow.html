@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <div class="col-sm-4">
+    <h4 class="text-center alert alert-info">Add new entry</h4>
+    <form action="" method="POST" class="d-inline">
+      {% csrf_token %} {{form.as_p}}
+      <input type="submit" class="btn btn-success" value="Add" />
+      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    </form>
+  </div>
+  <div class="col-sm-8">
+    <h4 class="text-center alert alert-info">Show Employee's Information</h4>
+    {% if stu %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for st in stu %}
+        <tr>
+          <th scope="row">{{st.id}}</th>
+          <td>{{st.name}}</td>
+          <td>{{st.email}}</td>
+          <td>{{st.salary}}</td>
+          <td>{{st.phone}}</td>
+          <td>
+            <a
+              href="{% url 'updatedata' st.id %}"
+              class="btn btn-warning btn-sm"
+              >Edit</a
+            >
+            <form
+              action="{% url 'deletedata' st.id %}"
+              class="d-inline"
+              method="POST"
+            >
+              {% csrf_token %}
+              <input
+                type="submit"
+                class="btn btn-danger btn-sm"
+                value="Delete"
+              />
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center alert alert-warning">No Data Found</h4>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
