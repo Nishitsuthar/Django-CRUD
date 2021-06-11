@@ -10,7 +10,6 @@ beautifulsoup4==4.9.3
 black==20.8b1
 bleach==3.3.0
 breezy==3.2.0
-btrfsutil==5.12.1
 CacheControl==0.12.6
 cachetools==4.2.2
 caffeine-ng==3.5.1
