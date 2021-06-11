@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["employee-crud15.herokuapp.com", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+STATICFILES_STOARGE = "whitenoise.storage.CompressedStaticFileStorage"
 
 ROOT_URLCONF = "crud.urls"
 
