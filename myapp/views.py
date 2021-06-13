@@ -56,20 +56,24 @@ def logoutpage(request):
 
 # this function will add the add and show in page
 def add_show(request):
-    if request.method == "POST":
-        fm = EmployeeDetails(request.POST)
-        if fm.is_valid():
-            name = fm.cleaned_data["name"]
-            email = fm.cleaned_data["email"]
-            salary = fm.cleaned_data["salary"]
-            phone = fm.cleaned_data["phone"]
-            reg = Employee(name=name, email=email, salary=salary, phone=phone)
-            reg.save()
-            fm = EmployeeDetails()
+    if request.user.is_anonymous:
+        return redirect("/login")
     else:
-        fm = EmployeeDetails()
-    stud = Employee.objects.all()
-    return render(request, "addandshow.html", {"form": fm, "stu": stud})
+        if request.method == "POST":
+            fm = EmployeeDetails(request.POST)
+            if fm.is_valid():
+                name = fm.cleaned_data["name"]
+                email = fm.cleaned_data["email"]
+                salary = fm.cleaned_data["salary"]
+                phone = fm.cleaned_data["phone"]
+                reg = Employee(name=name, email=email, salary=salary, phone=phone)
+                reg.save()
+                fm = EmployeeDetails()
+        else:
+            fm = EmployeeDetails()
+        stud = Employee.objects.all()
+        return render(request, "addandshow.html", {"form": fm, "stu": stud})
+    
 
 
 def delete_data(request, id):
